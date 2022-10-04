@@ -3,7 +3,7 @@
 Denne oppgaven er en innlevering i Algoritmer og Datastrukturer. 
 Oppgaven er levert av følgende studenter:
 * Nicolai Wahl, S362072, s362072@oslomet.no
-* R
+* Jonas Robin Øien, s364720, s364720@oslomet.no
 * g
 * g
 
