@@ -7,6 +7,7 @@ package no.oslomet.cs.algdat.Oblig2;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 
 public class DobbeltLenketListe<T> implements Liste<T> {
@@ -66,12 +67,33 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void leggInn(int indeks, T verdi) {
-        throw new UnsupportedOperationException();
-    }
+            /*Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
+
+            indeksKontroll(indeks, true);        // true: indeks = antall er lovlig
+
+            if (indeks == 0)                     // ny verdi skal ligge først
+            {
+                hode = new Node<>(verdi, hode);    // legges først
+                if (antall == 0) hale = hode;      // hode og hale peker på samme node
+            }
+            else if (indeks == antall)           // ny verdi skal ligge bakerst
+            {
+                hale = hale.neste = new Node<>(verdi, null);  // legges bakerst
+            }
+            else
+            {
+                Node<T> p = hode;                  // p flyttes indeks - 1 ganger
+                for (int i = 1; i < indeks; i++) p = p.neste;
+
+                p.neste = new Node<>(verdi, p.neste);  // verdi settes inn i listen
+            }
+
+            antall++;                            // listen har fått en ny verdi */
+        }
 
     @Override
     public boolean inneholder(T verdi) {
-        throw new UnsupportedOperationException();
+        return indeksTil(verdi) != -1;
     }
 
     @Override
@@ -80,7 +102,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     @Override
-    public int indeksTil(T verdi) {
+    public int indeksTil(T verdi) { //Utgangspunkt fra løsningsforslag fra kompendiet Oppgave
         if(verdi == null){
             return -1;
         }
