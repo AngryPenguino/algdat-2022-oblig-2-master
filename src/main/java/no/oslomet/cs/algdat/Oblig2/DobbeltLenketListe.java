@@ -41,7 +41,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public DobbeltLenketListe() {
         throw new UnsupportedOperationException();
     }
-
+    //Oppave 1
     public DobbeltLenketListe(T[] a) {
         throw new UnsupportedOperationException();
     }
@@ -49,12 +49,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public Liste<T> subliste(int fra, int til) {
         throw new UnsupportedOperationException();
     }
-
+    //Oppgave 1
     @Override
     public int antall() {
         throw new UnsupportedOperationException();
     }
-
+    //Oppgave 1
     @Override
     public boolean tom() {
         throw new UnsupportedOperationException();
@@ -64,7 +64,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public boolean leggInn(T verdi) {
         throw new UnsupportedOperationException();
     }
-
+    //Oppgave 5
     @Override
     public void leggInn(int indeks, T verdi) {
             /*Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
@@ -100,7 +100,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public T hent(int indeks) {
         throw new UnsupportedOperationException();
     }
-
+    //Oppgave 4
     @Override
     public int indeksTil(T verdi) { //Utgangspunkt fra løsningsforslag fra kompendiet Oppgave
         if(verdi == null){
@@ -119,7 +119,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public T oppdater(int indeks, T nyverdi) {
         throw new UnsupportedOperationException();
     }
-
+    //Oppgave 6
     @Override
     public boolean fjern(T verdi) {
         throw new UnsupportedOperationException();
@@ -129,12 +129,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public T fjern(int indeks) {
         throw new UnsupportedOperationException();
     }
-
+    //Oppgave 7
     @Override
     public void nullstill() {
         throw new UnsupportedOperationException();
     }
-
+    //Oppgave 2
     @Override
     public String toString() {
         throw new UnsupportedOperationException();
@@ -148,7 +148,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public Iterator<T> iterator() {
         throw new UnsupportedOperationException();
     }
-
+    //Oppgave 8
     public Iterator<T> iterator(int indeks) {
         throw new UnsupportedOperationException();
     }
@@ -167,7 +167,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         private DobbeltLenketListeIterator(int indeks) {
             throw new UnsupportedOperationException();
         }
-
+        //Oppgave 8
         @Override
         public boolean hasNext() {
             return denne != null;
@@ -177,14 +177,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         public T next() {
             throw new UnsupportedOperationException();
         }
-
+        //Oppgave 9
         @Override
         public void remove() {
             throw new UnsupportedOperationException();
         }
 
     } // class DobbeltLenketListeIterator
-
+    //Oppgave 10
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
         throw new UnsupportedOperationException();
     }
