@@ -45,7 +45,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public DobbeltLenketListe(T[] a) {
         throw new UnsupportedOperationException();
     }
-
+    //Oppgave 3b
     public Liste<T> subliste(int fra, int til) {
         throw new UnsupportedOperationException();
     }
@@ -59,7 +59,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public boolean tom() {
         throw new UnsupportedOperationException();
     }
-
+    //Oppave 2b
     @Override
     public boolean leggInn(T verdi) {
         throw new UnsupportedOperationException();
@@ -67,6 +67,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     //Oppgave 5
     @Override
     public void leggInn(int indeks, T verdi) {
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+        throw new UnsupportedOperationException();
+    }
+    //Oppave 4
+=======
+>>>>>>> Stashed changes
             /*Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
 
             indeksKontroll(indeks, true);        // true: indeks = antall er lovlig
@@ -91,11 +99,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             antall++;                            // listen har fått en ny verdi */
         }
 
+>>>>>>> 30aaf104ff87db7b5468d7f4b0636ad7ebecc5a7
     @Override
     public boolean inneholder(T verdi) {
         return indeksTil(verdi) != -1;
     }
-
+    //Oppgave 3
     @Override
     public T hent(int indeks) {
         throw new UnsupportedOperationException();
@@ -114,7 +123,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         return -1;
     }
-
+    //Oppgave 3
     @Override
     public T oppdater(int indeks, T nyverdi) {
         throw new UnsupportedOperationException();
@@ -124,7 +133,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public boolean fjern(T verdi) {
         throw new UnsupportedOperationException();
     }
-
+    //Oppgave 6
     @Override
     public T fjern(int indeks) {
         throw new UnsupportedOperationException();
@@ -134,16 +143,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public void nullstill() {
         throw new UnsupportedOperationException();
     }
-    //Oppgave 2
+    //Oppgave 2a
     @Override
     public String toString() {
         throw new UnsupportedOperationException();
     }
-
+    //Oppgave 2a
     public String omvendtString() {
         throw new UnsupportedOperationException();
     }
-
+    //Oppgave 8b
     @Override
     public Iterator<T> iterator() {
         throw new UnsupportedOperationException();
