@@ -4,7 +4,7 @@ Denne oppgaven er en innlevering i Algoritmer og Datastrukturer.
 Oppgaven er levert av følgende studenter:
 * Nicolai Wahl, S362072, s362072@oslomet.no
 * Jonas Robin Øien, s364720, s364720@oslomet.no
-* g
+* Jakob Elversøe Solberg s364755, s364755@oslomet.no
 * g
 
 # Arbeidsfordeling
