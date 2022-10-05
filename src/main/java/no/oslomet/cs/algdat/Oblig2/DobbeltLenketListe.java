@@ -53,6 +53,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public int antall() { //🤓🤓🤓🤓🤓🤓🤓🤓
 
+        antall(T);
 
         return antall;
     }
@@ -61,13 +62,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public boolean tom() { //😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎
 
 
-        int tom = 0;
-        if(tom == 1){
-            return true;
+        boolean tom;
+        if(T.size(0)){
+            tom = true;
         }
         else{
-            return false;
+            tom = false;
         }
+
+        return tom;
     }
 
     @Override
