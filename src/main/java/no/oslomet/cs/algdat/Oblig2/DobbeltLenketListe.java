@@ -181,9 +181,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             return "[]";
         } else {
             StringBuilder Streng = new StringBuilder();
+            Streng.append('[');
             Node<T> a = hode;
             Streng.append(a.verdi);
             a = a.neste;
+            Streng.append(',');
+            Streng.append(a.verdi);
+            a = a.neste;
+            Streng.append(']');
             return Streng.toString();
         }
 
