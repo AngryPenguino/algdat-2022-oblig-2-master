@@ -54,7 +54,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public int antall() { //🤓🤓🤓🤓🤓🤓🤓🤓
 
         antall = 0;
-        for(int Antall1 : T?, Liste? Liste<T>? ){ //Det er no way dette er vanskelig, jeg er bare dum
+        for(int Antall1 :/*T?, Liste? Liste<T>? */){ //Det er no way dette er vanskelig, jeg er bare dum
             antall ++;
         }
 
@@ -112,9 +112,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public boolean inneholder(T verdi) {
         return indeksTil(verdi) != -1;
     }
-
+    //Oppgave 3
     @Override
     public T hent(int indeks) {
+        throw new UnsupportedOperationException();
+    }
+    //Til oppgave 3
+    @Override
+    public T oppdater(int indeks, T nyverdi) {
         throw new UnsupportedOperationException();
     }
     //Oppgave 4
@@ -132,10 +137,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return -1;
     }
 
-    @Override
-    public T oppdater(int indeks, T nyverdi) {
-        throw new UnsupportedOperationException();
-    }
+
     //Oppgave 6
     @Override
     public boolean fjern(T verdi) {
