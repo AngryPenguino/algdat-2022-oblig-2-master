@@ -135,7 +135,28 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     //Oppgave 6
     @Override
     public boolean fjern(T verdi) {
-        throw new UnsupportedOperationException();
+        if (verdi == null) return false;          // ingen nullverdier i listen
+
+        Node<T> q = hode, p = null;               // hjelpepekere
+
+        while (q != null)                         // q skal finne verdien t
+        {
+            if (q.verdi.equals(verdi)) break;       // verdien funnet
+            p = q; q = q.neste;                     // p er forgjengeren til q
+        }
+
+        if (q == null) return false;              // fant ikke verdi
+        else if (q == hode) hode = hode.neste;    // går forbi q
+        else p.neste = q.neste;                   // går forbi q
+
+        if (q == hale) hale = p;                  // oppdaterer hale
+
+        q.verdi = null;                           // nuller verdien til q
+        q.neste = null;                           // nuller nestepeker
+
+        antall--;                                 // en node mindre i listen
+
+        return true;                              // vellykket fjerning
     }
 
     @Override
