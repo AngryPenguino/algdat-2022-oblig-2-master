@@ -53,18 +53,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public int antall() { //🤓🤓🤓🤓🤓🤓🤓🤓
 
-        antall = 0;
-        for(int Antall1 :/*T?, Liste? Liste<T>? */){ //Det er no way dette er vanskelig, jeg er bare dum
-            antall ++;
-        }
-
-
         return antall;
     }
     //Oppgave 1
     @Override
     public boolean tom() { //😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎
-
 
         boolean tom;
         if(antall == 0){
