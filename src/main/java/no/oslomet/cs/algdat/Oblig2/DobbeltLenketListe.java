@@ -69,10 +69,21 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         return tom;
     }
-
+    //Oppgave 2b
     @Override
     public boolean leggInn(T verdi) {
-        throw new UnsupportedOperationException();
+        Node<T> nyNode = new Node<>(verdi);
+        if (Objects.requireNonNull(verdi).equals(false)){
+            hode = new Node<T>(verdi);
+        } else {
+         nyNode.neste = null;
+         Node<T> siste = hode;
+         while (siste.neste != null){
+             siste = siste.neste;
+            }
+         siste.neste = nyNode;
+        }
+        return true;
     }
     //Oppgave 5
     @Override
@@ -203,30 +214,41 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
     }
-    //Oppgave 2
+    //Oppgave 2a
     @Override
     public String toString() {
-        if(T.size(0)){
+        if(antall == 0){
             return "[]";
         } else {
-            StringBuilder Streng = new StringBuilder();
-            Streng.append('[');
+            StringBuilder streng = new StringBuilder();
+            streng.append('[');
             Node<T> a = hode;
-            Streng.append(a.verdi);
-            a = a.neste;
-            Streng.append(',');
-            Streng.append(a.verdi);
-            a = a.neste;
-            Streng.append(']');
-            return Streng.toString();
+            while (a != null){
+                streng.append(a.verdi);
+                streng.append(',');
+                a = a.neste;
+            }
+            streng.append(']');
+            return streng.toString();
         }
-
-
     }
-
+    //Oppgave 2a
     public String omvendtString() {
-        throw new UnsupportedOperationException();
+        if(antall == 0){
+            return "[]";
+        }
+        StringBuilder omvendtStreng = new StringBuilder();
+        omvendtStreng.append('[');
+        Node<T> a = hale;
+        while (a != null){
+            omvendtStreng.append(a.verdi);
+            omvendtStreng.append('a');
+            a = a.forrige;
+        }
+        omvendtStreng.append(']');
+        return omvendtStreng.toString();
     }
+
 
     @Override
     public Iterator<T> iterator() {
