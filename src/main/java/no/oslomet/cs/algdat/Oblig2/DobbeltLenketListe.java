@@ -105,6 +105,22 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public boolean inneholder(T verdi) {
         return indeksTil(verdi) != -1;
     }
+    //Hjelpemetode til oppgave 3
+    private Node<T> finnNode(int indeks){
+
+        Node<T> finnN = null;
+
+        if (indeks < antall / 2){
+            finnN = hode;
+            for(int i = 0; i < indeks; i++){
+                finnN = finnN.neste;
+            }
+        }
+
+        return finnN;
+
+    }
+
     //Oppgave 3
     @Override
     public T hent(int indeks) {
