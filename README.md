@@ -5,7 +5,7 @@ Oppgaven er levert av følgende studenter:
 * Nicolai Wahl, S362072, s362072@oslomet.no
 * Jonas Robin Øien, s364720, s364720@oslomet.no
 * Jakob Elversøe Solberg s364755, s364755@oslomet.no
-* g
+* Georg Prahl Harbitz s362109, s362109@oslomet.no
 
 # Arbeidsfordeling
 
@@ -13,6 +13,7 @@ I oppgaven har vi hatt følgende arbeidsfordeling:
 * Nicolai har hatt hovedansvar for oppgave 1, 3 
 * Jakob har hatt hovedansvar for oopgave 4,5 og 6
 * Jonas har hatt hovedansvar for oppgave 2 og ?. 
+* Georg Har hatt hovedansvar for oppgave 8
 * Vi har i fellesskap løst oppgave 7 
 
 # Oppgavebeskrivelse
