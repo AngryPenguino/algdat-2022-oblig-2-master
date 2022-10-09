@@ -131,12 +131,19 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     //Oppgave 3
     @Override
     public T hent(int indeks) {
-        throw new UnsupportedOperationException();
+         //Kanskje ha en sjekk her? idk
+         return finnNode(indeks).verdi; //Er dette for simpelt? 🗿
     }
     //Til oppgave 3
     @Override
     public T oppdater(int indeks, T nyverdi) {
-        throw new UnsupportedOperationException();
+        //Sjekk kanskje?
+        Node<T> Oppdater = finnNode(indeks);
+        T verdiGammel = Oppdater.verdi;
+        Oppdater.verdi = nyverdi;
+
+        //Noe noweno no eneoeno hjegh vet ikke :(
+        return verdiGammel;
     }
     //Oppgave 4
     @Override
