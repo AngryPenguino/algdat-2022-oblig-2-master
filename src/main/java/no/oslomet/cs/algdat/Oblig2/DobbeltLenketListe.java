@@ -105,19 +105,26 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public boolean inneholder(T verdi) {
         return indeksTil(verdi) != -1;
     }
+
     //Hjelpemetode til oppgave 3
     private Node<T> finnNode(int indeks){
 
-        Node<T> finnN = null;
+        Node<T> finnN;                          //Initialiserer variabel
 
-        if (indeks < antall / 2){
-            finnN = hode;
-            for(int i = 0; i < indeks; i++){
-                finnN = finnN.neste;
+        if(indeks < antall / 2){                //Om indeksen til tallet er mindre en full antall / 2.
+            finnN = hode;                       //Så blir finnN (variablen) satt til starten av rekken.
+            for(int i = 0; i < indeks; i++){    //Går gjennom for løkke til vi kommer til indeks nummeret.
+                finnN = finnN.neste;            //Setter variablen finnN til neste tallet i rekken til vi kommer til ønsket tall.
+            }
+        }
+        else{                                           //Hvis ikke indeks < antall / 2.
+            finnN = hale;                               //Starter vi søket fra enden av rekken i stedet.
+            for(int i = antall - 1; i > indeks; i--){   //Løper jeg for løkken, denne gangen bakfra.
+                finnN = finnN.forrige;                  //Setter variablen finnN til det forrige tallet i rekken til vi kommer til det ønskede tallet.
             }
         }
 
-        return finnN;
+        return finnN;                                   //Returnerer den ønskede verdien.
 
     }
 
