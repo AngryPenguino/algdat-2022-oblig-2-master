@@ -199,7 +199,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         while (p != null)
         {
-            //Trenger noe inni her
+            q = p.neste;
+            p.neste = null;
+            p.verdi = null;
+            p = q;
         }
 
     }
