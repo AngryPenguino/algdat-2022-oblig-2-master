@@ -214,57 +214,44 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
 
     //Oppgave 6
-    @Override
-    public boolean fjern(T verdi) { //Fra kompendiet løsningsforslag oppgave 3 i avsnitt 3.3.3
-        if (verdi == null) return false;          // ingen nullverdier i listen
-
-        Node<T> q = hode, p = null;               // hjelpepekere
-
-        while (q != null)                         // q skal finne verdien t
+    private T fjernNode(Node<T> p)  // private hjelpemetode
+    {
+        if (p == hode)
         {
-            if (q.verdi.equals(verdi)) break;       // verdien funnet
-            p = q; q = q.neste;                     // p er forgjengeren til q
+            if (antall == 1) hode = hale = null;      // kun en verdi i listen
+            else (hode = hode.neste).forrige = null;  // fjerner den første
         }
+        else if (p == hale) (hale = hale.forrige).neste = null;  // fjerner den siste
+        else (p.forrige.neste = p.neste).forrige = p.forrige;    // fjerner p
 
-        if (q == null) return false;              // fant ikke verdi
-        else if (q == hode) hode = hode.neste;    // går forbi q
-        else p.neste = q.neste;                   // går forbi q
+        antall--;     // en mindre i listen
+        endringer++;  // en endring
 
-        if (q == hale) hale = p;                  // oppdaterer hale
+        return p.verdi;
+    }
 
-        q.verdi = null;                           // nuller verdien til q
-        q.neste = null;                           // nuller nestepeker
+    @Override
+    public boolean fjern(T verdi) //Fra kompendiet løsningsforslag oppgave 3 i avsnitt 3.3.3
+    {
+        if (verdi == null) return false;  // ingen nullverdier i listen
 
-        antall--;                                 // en node mindre i listen
-
-        return true;                              // vellykket fjerning
+        for (Node<T> p = hode; p != null; p = p.neste)
+        {
+            if (p.verdi.equals(verdi))
+            {
+                fjernNode(p);   // bruker den private hjelpemetoden
+                return true;
+            }
+        }
+        return false;  // verdi ligger ikke i listen
     }
 
     @Override
     public T fjern(int indeks) //Programkode 3.3.3 c) fra kompendiet
     {
-        indeksKontroll(indeks, false);  // Se Liste, false: indeks = antall er ulovlig
+        indeksKontroll(indeks, false);
 
-        T temp;                              // hjelpevariabel
-
-        if (indeks == 0)                     // skal første verdi fjernes?
-        {
-            temp = hode.verdi;                 // tar vare på verdien som skal fjernes
-            hode = hode.neste;                 // hode flyttes til neste node
-            if (antall == 1) hale = null;      // det var kun en verdi i listen
-        }
-        else
-        {
-            Node<T> p = finnNode(indeks - 1);  // p er noden foran den som skal fjernes
-            Node<T> q = p.neste;               // q skal fjernes
-            temp = q.verdi;                    // tar vare på verdien som skal fjernes
-
-            if (q == hale) hale = p;           // q er siste node
-            p.neste = q.neste;                 // "hopper over" q
-        }
-
-        antall--;                            // reduserer antallet
-        return temp;                         // returner fjernet verdi
+        return fjernNode(finnNode(indeks)); // bruker de to hjelpemetodene
     }
     //Oppgave 7
     @Override
