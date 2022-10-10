@@ -93,7 +93,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
     //Oppgave 5
     @Override
-    public void leggInn(int indeks, T verdi) {
+    public void leggInn(int indeks, T verdi) { //Utgangspunkt fra kompendiet programkode 3.3.2 g)
             /*Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
 
             indeksKontroll(indeks, true);        // true: indeks = antall er lovlig
@@ -184,15 +184,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
     //Oppgave 4
     @Override
-    public int indeksTil(T verdi) { //Utgangspunkt fra løsningsforslag fra kompendiet Oppgave
+    public int indeksTil(T verdi) { //Utgangspunkt fra løsningsforslag fra kompendiet Oppgave 2 avsnitt 3.3.3
         if(verdi == null){
             return -1;
         }
-        Node<T> p = hode;
+        Node<T> p = hale;
 
-        for (int indeks = 0; indeks < antall; indeks++){
+        for (int indeks = antall; indeks >= 0; indeks--){
             if (p.verdi.equals(verdi)) return indeks;
-            p = p.neste;
+            p = p.forrige;
         }
         return -1;
     }
@@ -232,7 +232,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     //Oppgave 7
     @Override
     public void nullstill() {
-        Node<T> p = hode, q = null;
+        Node<T> p = hode, q = null; //Utganspunkt fra løsningsforslag komendiet oppgave 2 avsnitt 3.3.2
 
         while (p != null)
         {
@@ -241,7 +241,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             p.verdi = null;
             p = q;
         }
-
+        hode = hale = null;
+        antall = 0;
     }
     //Oppgave 2a
     @Override
