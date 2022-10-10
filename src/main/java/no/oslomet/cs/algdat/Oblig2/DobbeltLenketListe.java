@@ -117,6 +117,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     //Hjelpemetode til oppgave 3
     private Node<T> finnNode(int indeks){
 
+        indeksKontroll(indeks);
+
+
         Node<T> finnN;                          //Initialiserer variabel
 
         if(indeks < antall / 2){                //Om indeksen til tallet er mindre en full antall / 2.
@@ -140,17 +143,23 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public T hent(int indeks) {
          //Kanskje ha en sjekk her? idk
-         return finnNode(indeks).verdi; //Er dette for simpelt? 🗿
+        indeksKontroll(indeks, leggInn(T));
+        return finnNode(indeks).verdi; //Er dette for simpelt? 🗿
     }
     //Til oppgave 3
     @Override
     public T oppdater(int indeks, T nyverdi) {
         //Sjekk kanskje?
+        indeksKontroll();
+        nullSjekk();
+
+
         Node<T> Oppdater = finnNode(indeks);
         T verdiGammel = Oppdater.verdi;
         Oppdater.verdi = nyverdi;
 
         //Noe noweno no eneoeno hjegh vet ikke :(
+        endringer++;
         return verdiGammel;
     }
     //Oppgave 4
