@@ -53,6 +53,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 antall++; //Øker telleren for antallet i listen
             }
         }
+        if(antall == 0){
+            hode = hale = null;
+        }
+        else{
+            (hode = hode.neste).forrige = null;
+        }
 
     }
     //Oppgave 1
@@ -65,15 +71,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public boolean tom() { //😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎
 
-        boolean tom;
-        if(antall == 0){
-            tom = true;
-        }
-        else{
-            tom = false;
-        }
-
-        return tom;
+        return antall == 0;
     }
     //Oppgave 2b
     @Override
