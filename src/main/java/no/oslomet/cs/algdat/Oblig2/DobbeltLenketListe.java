@@ -43,10 +43,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     //Oppave 1
     public DobbeltLenketListe(T[] a) {
         //Test
+        this(); //Starter konstruktøren over ^. "DobbeltLenketListe()"
+        Objects.requireNonNull(a, "a er null, det kan den ikke være"); //Verdiene kan ikke være null
+
+        hode = hale = new Node<>(null); //Kommentar
+        for(T verdi : a){
+            if(verdi != null){
+                hale = hale.neste = new Node<>(verdi, hale, null); //Hvis verdien ikke er null, legger til en ny node på enden av listen
+                antall++; //Øker telleren for antallet i listen
+            }
+        }
+        if(antall == 0){
+            hode = hale = null;
+        }
+        else{
+            (hode = hode.neste).forrige = null;
+        }
 
     }
-
-
     //Oppgave 1
     @Override
     public int antall() { //🤓🤓🤓🤓🤓🤓🤓🤓
@@ -57,15 +71,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public boolean tom() { //😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎
 
-        boolean tom;
-        if(antall == 0){
-            tom = true;
-        }
-        else{
-            tom = false;
-        }
-
-        return tom;
+        return antall == 0;
     }
     //Oppgave 2b
     @Override
@@ -118,7 +124,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     //Hjelpemetoder til oppgave 3
     private Node<T> finnNode(int indeks){
 
-        indeksKontroll(indeks);
+        indeksKontroll(indeks, false);
 
 
         Node<T> finnN;                          //Initialiserer variabel
@@ -144,19 +150,28 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             throw new NullPointerException("Ikke lov med null verdier");
         }
     }
+    private static void fratilKontroll(int antall, int fra, int til){
+        if(fra > 0){
+            throw new IndexOutOfBoundsException("Fra: '" + fra + "' er negativ :)");
+        }
+        if(til > antall){
+            throw new IndexOutOfBoundsException("Til: '" + til + "' er større enn antall: '" + antall + "'");
+        }
+        if(fra > til){
+            throw new IndexOutOfBoundsException("Fra: '" + fra + "' er større enn til: '" + til + "'. Intervallet finnes ikke.");
+        }
+    }
 
     //Oppgave 3
     @Override
     public T hent(int indeks) {
-         //Kanskje ha en sjekk her? idk
-        indeksKontroll(indeks, leggInn(T));
-        return finnNode(indeks).verdi; //Er dette for simpelt? 🗿
+        indeksKontroll(indeks, false);
+        return finnNode(indeks).verdi;
     }
     //Til oppgave 3
     @Override
     public T oppdater(int indeks, T nyverdi) {
-        //Sjekk kanskje?
-        indeksKontroll(indeks);
+        indeksKontroll(indeks, false);
         nullSjekk(indeks);
 
 
@@ -164,15 +179,21 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         T verdiGammel = Oppdater.verdi;
         Oppdater.verdi = nyverdi;
 
-        //Noe noweno no eneoeno hjegh vet ikke :(
+
         endringer++;
         return verdiGammel;
     }
     public Liste<T> subliste(int fra, int til) {
-        indeksKontroll(fra,til);
-        Liste T =
+        fratilKontroll(antall, fra, til);                           //Gjør en test om intervall i lovlig
 
-        return T;
+        DobbeltLenketListe <T> liste = new DobbeltLenketListe<>();  //Oppretter en liste
+        Node<T> subL = finnNode(fra);                               //Bruk finnNode til å hente indeksen lik fra
+        for(int i = fra; i < til; i++){                             //For-løkke til å hente verdiene i fra - > til
+            liste.leggInn(subL.verdi);                              //Legger verdiene inn i listen
+            subL = subL.neste;                                      //Og går videre i listen
+        }
+
+        return liste;                                               //Returnerer den nye listen
     }
     //Oppgave 4
     @Override
@@ -192,7 +213,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     //Oppgave 6
     @Override
-    public boolean fjern(T verdi) {
+    public boolean fjern(T verdi) { //Fra kompendiet løsningsforslag oppgave 3 i avsnitt 3.3.3
         if (verdi == null) return false;          // ingen nullverdier i listen
 
         Node<T> q = hode, p = null;               // hjelpepekere
@@ -218,8 +239,30 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     @Override
-    public T fjern(int indeks) {
-        throw new UnsupportedOperationException();
+    public T fjern(int indeks) //Programkode 3.3.3 c) fra kompendiet
+    {
+        indeksKontroll(indeks, false);  // Se Liste, false: indeks = antall er ulovlig
+
+        T temp;                              // hjelpevariabel
+
+        if (indeks == 0)                     // skal første verdi fjernes?
+        {
+            temp = hode.verdi;                 // tar vare på verdien som skal fjernes
+            hode = hode.neste;                 // hode flyttes til neste node
+            if (antall == 1) hale = null;      // det var kun en verdi i listen
+        }
+        else
+        {
+            Node<T> p = finnNode(indeks - 1);  // p er noden foran den som skal fjernes
+            Node<T> q = p.neste;               // q skal fjernes
+            temp = q.verdi;                    // tar vare på verdien som skal fjernes
+
+            if (q == hale) hale = p;           // q er siste node
+            p.neste = q.neste;                 // "hopper over" q
+        }
+
+        antall--;                            // reduserer antallet
+        return temp;                         // returner fjernet verdi
     }
     //Oppgave 7
     @Override
