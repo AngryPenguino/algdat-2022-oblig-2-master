@@ -192,7 +192,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     //Oppgave 6
     @Override
-    public boolean fjern(T verdi) {
+    public boolean fjern(T verdi) { //Fra kompendiet løsningsforslag oppgave 3 i avsnitt 3.3.3
         if (verdi == null) return false;          // ingen nullverdier i listen
 
         Node<T> q = hode, p = null;               // hjelpepekere
@@ -218,8 +218,30 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     @Override
-    public T fjern(int indeks) {
-        throw new UnsupportedOperationException();
+    public T fjern(int indeks) //Programkode 3.3.3 c) fra kompendiet
+    {
+        indeksKontroll(indeks, false);  // Se Liste, false: indeks = antall er ulovlig
+
+        T temp;                              // hjelpevariabel
+
+        if (indeks == 0)                     // skal første verdi fjernes?
+        {
+            temp = hode.verdi;                 // tar vare på verdien som skal fjernes
+            hode = hode.neste;                 // hode flyttes til neste node
+            if (antall == 1) hale = null;      // det var kun en verdi i listen
+        }
+        else
+        {
+            Node<T> p = finnNode(indeks - 1);  // p er noden foran den som skal fjernes
+            Node<T> q = p.neste;               // q skal fjernes
+            temp = q.verdi;                    // tar vare på verdien som skal fjernes
+
+            if (q == hale) hale = p;           // q er siste node
+            p.neste = q.neste;                 // "hopper over" q
+        }
+
+        antall--;                            // reduserer antallet
+        return temp;                         // returner fjernet verdi
     }
     //Oppgave 7
     @Override
