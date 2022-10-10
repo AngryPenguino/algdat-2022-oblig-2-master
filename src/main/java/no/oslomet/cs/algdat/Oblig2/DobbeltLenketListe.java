@@ -124,7 +124,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     //Hjelpemetoder til oppgave 3
     private Node<T> finnNode(int indeks){
 
-        indeksKontroll(indeks);
+        indeksKontroll(indeks, false);
 
 
         Node<T> finnN;                          //Initialiserer variabel
@@ -150,19 +150,28 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             throw new NullPointerException("Ikke lov med null verdier");
         }
     }
+    private static void fratilKontroll(int antall, int fra, int til){
+        if(fra > 0){
+            throw new IndexOutOfBoundsException("Fra: '" + fra + "' er negativ :)");
+        }
+        if(til > antall){
+            throw new IndexOutOfBoundsException("Til: '" + til + "' er større enn antall: '" + antall + "'");
+        }
+        if(fra > til){
+            throw new IndexOutOfBoundsException("Fra: '" + fra + "' er større enn til: '" + til + "'. Intervallet finnes ikke.")
+        }
+    }
 
     //Oppgave 3
     @Override
     public T hent(int indeks) {
-         //Kanskje ha en sjekk her? idk
-        indeksKontroll(indeks, leggInn(T));
-        return finnNode(indeks).verdi; //Er dette for simpelt? 🗿
+        indeksKontroll(indeks, false);
+        return finnNode(indeks).verdi;
     }
     //Til oppgave 3
     @Override
     public T oppdater(int indeks, T nyverdi) {
-        //Sjekk kanskje?
-        indeksKontroll(indeks);
+        indeksKontroll(indeks, false);
         nullSjekk(indeks);
 
 
@@ -170,15 +179,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         T verdiGammel = Oppdater.verdi;
         Oppdater.verdi = nyverdi;
 
-        //Noe noweno no eneoeno hjegh vet ikke :(
+
         endringer++;
         return verdiGammel;
     }
     public Liste<T> subliste(int fra, int til) {
-        indeksKontroll(fra,til);
-        Liste T =
-
-        return T;
+        fratilKontroll(antall, fra, til);
+        return
     }
     //Oppgave 4
     @Override
