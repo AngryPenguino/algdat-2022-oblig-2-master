@@ -319,11 +319,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public Iterator<T> iterator() {
-        throw new UnsupportedOperationException();
+        return new DobbeltLenketListeIterator();
     }
     //Oppgave 8
     public Iterator<T> iterator(int indeks) {
-        throw new UnsupportedOperationException();
+        indeksKontroll(indeks, false);
+        return new DobbeltLenketListeIterator(indeks);
     }
 
     private class DobbeltLenketListeIterator implements Iterator<T> {
@@ -338,7 +339,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
         private DobbeltLenketListeIterator(int indeks) {
-            throw new UnsupportedOperationException();
+            indeksKontroll(indeks, false);
+            denne = finnNode(indeks);
+            fjernOK = false;
+            iteratorendringer = endringer;
         }
         //Oppgave 8
         @Override
@@ -350,17 +354,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         public T next() {
             if(iteratorendringer != endringer){
                 throw new ConcurrentModificationException("Endringer har blitt gjort med listen");
-            } else {
-                if (!hasNext()) {
-                    throw new NoSuchElementException("ingen flere noder i listen");
-                } else {
-                    fjernOK = true;
-                    T verdi = denne.verdi;                  // Lagrer verdien i "denne"
-                    denne = denne.neste;                    // Flytter "denne" til neste
-                    return verdi;
-                }
             }
-        }
+            if (!hasNext()) {
+                throw new NoSuchElementException("ingen flere noder i listen");
+            }
+            fjernOK = true;
+            T verdi = denne.verdi;                  // Lagrer verdien i "denne"
+            denne = denne.neste;                    // Flytter "denne" til neste
+            return verdi;
+            }
         //Oppgave 9
         @Override
         public void remove() {
