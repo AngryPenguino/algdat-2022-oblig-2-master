@@ -43,10 +43,18 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     //Oppave 1
     public DobbeltLenketListe(T[] a) {
         //Test
+        this(); //Starter konstruktøren over ^. "DobbeltLenketListe()"
+        Objects.requireNonNull(a, "a er null, det kan den ikke være"); //Verdiene kan ikke være null
+
+        hode = hale = new Node<>(null); //Kommentar
+        for(T verdi : a){
+            if(verdi != null){
+                hale = hale.neste = new Node<>(verdi, hale, null); //Hvis verdien ikke er null, legger til en ny node på enden av listen
+                antall++; //Øker telleren for antallet i listen
+            }
+        }
 
     }
-
-
     //Oppgave 1
     @Override
     public int antall() { //🤓🤓🤓🤓🤓🤓🤓🤓
