@@ -340,18 +340,21 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
         @Override
-        public T next() {
+        public T next() {                                   // Tokk utgangspunkt i programkode 3.3.4
+            if (!hasNext()) {
+            throw new NoSuchElementException("ingen flere noder i listen");
+        }
             if(iteratorendringer != endringer){
                 throw new ConcurrentModificationException("Endringer har blitt gjort med listen");
             }
-            if (!hasNext()) {
-                throw new NoSuchElementException("ingen flere noder i listen");
-            }
+
             fjernOK = true;
-            T verdi = denne.verdi;                  // Lagrer verdien i "denne"
+
+            T temp = denne.verdi;                  // Lagrer verdien i "denne"
             denne = denne.neste;                    // Flytter "denne" til neste
-            return verdi;
-            }
+
+            return temp;
+        }
         //Oppgave 9
         @Override
         public void remove() {
