@@ -352,20 +352,18 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //Oppgave 9
         @Override
         public void remove() {
-            /*throw new IllegalStateException();
-            throw new ConcurrentModificationException();
-            fjernOK = false;
-
-            if (this.forrige == hode){
-                hode = this;
+            if (fjernOK == false){
+                throw new IllegalStateException();
+            } else if (iteratorendringer != endringer) {
+                throw new ConcurrentModificationException();
+                } Node<T> current = null;
             }
-*/
         }
-
-    } // class DobbeltLenketListeIterator
+        // class DobbeltLenketListeIterator
     //Oppgave 10
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
-        throw new UnsupportedOperationException();
+       for(int i = liste.antall(); i < 0; i--){
+       }
     }
 
 } // class DobbeltLenketListe
