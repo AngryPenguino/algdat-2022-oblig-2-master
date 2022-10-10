@@ -36,11 +36,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     private int endringer;         // antall endringer i listen
 
     public DobbeltLenketListe() {
-        throw new UnsupportedOperationException();
+        hode = hale = null;
+        antall = 0;
+        endringer = 0;
     }
     //Oppave 1
     public DobbeltLenketListe(T[] a) {
-        throw new UnsupportedOperationException();
+        //Test
+
     }
 
 
@@ -166,7 +169,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return verdiGammel;
     }
     public Liste<T> subliste(int fra, int til) {
-        throw new UnsupportedOperationException();
+        indeksKontroll(fra,til);
+        Liste T =
+
+        return T;
     }
     //Oppgave 4
     @Override
