@@ -78,16 +78,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public boolean leggInn(T verdi) {
         Node<T> nyNode = new Node<>(verdi);
-        if (Objects.requireNonNull(verdi).equals(false)){
+        Objects.requireNonNull(verdi);
             hode = new Node<T>(verdi);
-        } else {
-         nyNode.neste = null;
+                 nyNode.neste = null;
          Node<T> siste = hode;
          while (siste.neste != null){
              siste = siste.neste;
             }
          siste.neste = nyNode;
-        }
         return true;
     }
     //Oppgave 5
