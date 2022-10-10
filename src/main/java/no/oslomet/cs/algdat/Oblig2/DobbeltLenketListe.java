@@ -46,13 +46,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         this(); //Starter konstruktøren over ^. "DobbeltLenketListe()"
         Objects.requireNonNull(a, "a er null, det kan den ikke være"); //Verdiene kan ikke være null
 
-        hode = hale = new Node<>(null); //Kommentar
+        hode = hale = new Node<>(null); //Midlertidig node for å lage lenken.
         for(T verdi : a){
             if(verdi != null){
-                hale = hale.neste = new Node<>(verdi, hale, null); //Hvis verdien ikke er null, legger til en ny node på enden av listen
+                hale = hale.neste = new Node<>(verdi, hale, null); //Hvis verdien ikke er null, legger til en ny node på enden av listen.
                 antall++; //Øker telleren for antallet i listen
             }
         }
+        //Koden for å fjerne "hode = hale = new Node<>(null) siden den kun var midlertidig.
         if(antall == 0){
             hode = hale = null;
         }
@@ -77,43 +78,44 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public boolean leggInn(T verdi) {
         Node<T> nyNode = new Node<>(verdi);
-        if (Objects.requireNonNull(verdi).equals(false)){
+        Objects.requireNonNull(verdi);
             hode = new Node<T>(verdi);
-        } else {
-         nyNode.neste = null;
+                 nyNode.neste = null;
          Node<T> siste = hode;
          while (siste.neste != null){
              siste = siste.neste;
             }
          siste.neste = nyNode;
-        }
         return true;
     }
     //Oppgave 5
     @Override
-    public void leggInn(int indeks, T verdi) { //Utgangspunkt fra kompendiet programkode 3.3.2 g)
-            /*Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
+        public void leggInn(int indeks, T verdi) //Utgangspunkt fra kompendiet programkode 3.3.2 g)
+        {
+            Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
 
-            indeksKontroll(indeks, true);        // true: indeks = antall er lovlig
+            indeksKontroll(indeks, true);
 
-            if (indeks == 0)                     // ny verdi skal ligge først
+            if (tom())                              // tom liste
             {
-                hode = new Node<>(verdi, hode);    // legges først
-                if (antall == 0) hale = hode;      // hode og hale peker på samme node
+                hode = hale = new Node<>(verdi, null, null);
             }
-            else if (indeks == antall)           // ny verdi skal ligge bakerst
+            else if (indeks == 0)                   // ny verdi forrest
             {
-                hale = hale.neste = new Node<>(verdi, null);  // legges bakerst
+                hode = hode.forrige = new Node<>(verdi, null, hode);
             }
-            else
+            else if (indeks == antall)              // ny verdi bakerst
             {
-                Node<T> p = hode;                  // p flyttes indeks - 1 ganger
-                for (int i = 1; i < indeks; i++) p = p.neste;
-
-                p.neste = new Node<>(verdi, p.neste);  // verdi settes inn i listen
+                hale = hale.neste = new Node<>(verdi, hale, null);
+            }
+            else                                    // ny verdi på plass indeks
+            {
+                Node<T> p = finnNode(indeks);     // ny verdi skal til venstre for p
+                p.forrige = p.forrige.neste = new Node<>(verdi, p.forrige, p);
             }
 
-            antall++;                            // listen har fått en ny verdi */
+            antall++;            // ny verdi i listen
+            endringer++;   // en endring i listen
         }
 
     @Override
@@ -124,15 +126,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     //Hjelpemetoder til oppgave 3
     private Node<T> finnNode(int indeks){
 
-        indeksKontroll(indeks, false);
+        indeksKontroll(indeks, false);           //Sjekker om indeksen er lovlig
 
 
-        Node<T> finnN;                          //Initialiserer variabel
+        Node<T> finnN;                                  //Initialiserer variabel
 
-        if(indeks < antall / 2){                //Om indeksen til tallet er mindre en full antall / 2.
-            finnN = hode;                       //Så blir finnN (variablen) satt til starten av rekken.
-            for(int i = 0; i < indeks; i++){    //Går gjennom for løkke til vi kommer til indeks nummeret.
-                finnN = finnN.neste;            //Setter variablen finnN til neste tallet i rekken til vi kommer til ønsket tall.
+        if(indeks < antall / 2){                        //Om indeksen til tallet er mindre en full antall / 2.
+            finnN = hode;                               //Så blir finnN (variablen) satt til starten av rekken.
+            for(int i = 0; i < indeks; i++){            //Går gjennom for løkke til vi kommer til indeks nummeret.
+                finnN = finnN.neste;                    //Setter variablen finnN til neste tallet i rekken til vi kommer til ønsket tall.
             }
         }
         else{                                           //Hvis ikke indeks < antall / 2.
@@ -145,19 +147,19 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return finnN;                                   //Returnerer den ønskede verdien.
 
     }
-    private static <T> void nullSjekk(T verdi){
+    private static <T> void nullSjekk(T verdi){         //Om verdien som skal inn er null, ingen verdi, så blir det sendt error
         if (verdi == null){
             throw new NullPointerException("Ikke lov med null verdier");
         }
     }
     private static void fratilKontroll(int antall, int fra, int til){
-        if(fra > 0){
+        if(fra < 0){        //Om fra er mindre enn 0 så får vi error, kan ikke starte på en negativ verdi.
             throw new IndexOutOfBoundsException("Fra: '" + fra + "' er negativ :)");
         }
-        if(til > antall){
+        if(til > antall){   //Om til er større enn antall verdier så får vi error.
             throw new IndexOutOfBoundsException("Til: '" + til + "' er større enn antall: '" + antall + "'");
         }
-        if(fra > til){
+        if(fra > til){      //Om fra er større enn til så får vi error. Start større enn slutt er kult.
             throw new IndexOutOfBoundsException("Fra: '" + fra + "' er større enn til: '" + til + "'. Intervallet finnes ikke.");
         }
     }
@@ -165,19 +167,19 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     //Oppgave 3
     @Override
     public T hent(int indeks) {
-        indeksKontroll(indeks, false);
-        return finnNode(indeks).verdi;
+        indeksKontroll(indeks, false);       //Sjekker indeksen
+        return finnNode(indeks).verdi;              //Returnerer verdien til indeksen
     }
     //Til oppgave 3
     @Override
     public T oppdater(int indeks, T nyverdi) {
-        indeksKontroll(indeks, false);
-        nullSjekk(indeks);
+        indeksKontroll(indeks, false);       //Sjekker indeksen
+        nullSjekk(indeks);                          //Sjekker at indeksene ikke er null
 
 
-        Node<T> Oppdater = finnNode(indeks);
-        T verdiGammel = Oppdater.verdi;
-        Oppdater.verdi = nyverdi;
+        Node<T> Oppdater = finnNode(indeks);        //Bruker finnNode til å finne den nye verdien
+        T verdiGammel = Oppdater.verdi;             //Setter gammel verdi til den oppdaterte verdien
+        Oppdater.verdi = nyverdi;                   //Og den oppdaterte verdien er nå den nye verdien
 
 
         endringer++;
