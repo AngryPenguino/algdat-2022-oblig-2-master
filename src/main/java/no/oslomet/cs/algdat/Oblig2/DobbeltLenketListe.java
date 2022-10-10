@@ -357,6 +357,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                     fjernOK = true;
                     T verdi = denne.verdi;                  // Lagrer verdien i "denne"
                     denne = denne.neste;                    // Flytter "denne" til neste
+                    return verdi;
                 }
             }
         }
