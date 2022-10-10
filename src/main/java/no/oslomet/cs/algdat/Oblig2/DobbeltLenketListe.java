@@ -43,9 +43,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         throw new UnsupportedOperationException();
     }
 
-    public Liste<T> subliste(int fra, int til) {
-        throw new UnsupportedOperationException();
-    }
+
     //Oppgave 1
     @Override
     public int antall() { //🤓🤓🤓🤓🤓🤓🤓🤓
@@ -166,6 +164,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //Noe noweno no eneoeno hjegh vet ikke :(
         endringer++;
         return verdiGammel;
+    }
+    public Liste<T> subliste(int fra, int til) {
+        throw new UnsupportedOperationException();
     }
     //Oppgave 4
     @Override
