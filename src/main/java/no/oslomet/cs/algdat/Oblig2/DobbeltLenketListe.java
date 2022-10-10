@@ -114,7 +114,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return indeksTil(verdi) != -1;
     }
 
-    //Hjelpemetode til oppgave 3
+    //Hjelpemetoder til oppgave 3
     private Node<T> finnNode(int indeks){
 
         indeksKontroll(indeks);
@@ -138,6 +138,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return finnN;                                   //Returnerer den ønskede verdien.
 
     }
+    private static <T> void nullSjekk(T verdi){
+        if (verdi == null){
+            throw new NullPointerException("Ikke lov med null verdier");
+        }
+    }
 
     //Oppgave 3
     @Override
@@ -150,8 +155,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public T oppdater(int indeks, T nyverdi) {
         //Sjekk kanskje?
-        indeksKontroll();
-        nullSjekk();
+        indeksKontroll(indeks);
+        nullSjekk(indeks);
 
 
         Node<T> Oppdater = finnNode(indeks);
