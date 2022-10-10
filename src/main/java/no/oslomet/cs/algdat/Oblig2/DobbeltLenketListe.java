@@ -92,29 +92,32 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
     //Oppgave 5
     @Override
-    public void leggInn(int indeks, T verdi) { //Utgangspunkt fra kompendiet programkode 3.3.2 g)
-            /*Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
+        public void leggInn(int indeks, T verdi) //Utgangspunkt fra kompendiet programkode 3.3.2 g)
+        {
+            Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
 
-            indeksKontroll(indeks, true);        // true: indeks = antall er lovlig
+            indeksKontroll(indeks, true);
 
-            if (indeks == 0)                     // ny verdi skal ligge først
+            if (tom())                              // tom liste
             {
-                hode = new Node<>(verdi, hode);    // legges først
-                if (antall == 0) hale = hode;      // hode og hale peker på samme node
+                hode = hale = new Node<>(verdi, null, null);
             }
-            else if (indeks == antall)           // ny verdi skal ligge bakerst
+            else if (indeks == 0)                   // ny verdi forrest
             {
-                hale = hale.neste = new Node<>(verdi, null);  // legges bakerst
+                hode = hode.forrige = new Node<>(verdi, null, hode);
             }
-            else
+            else if (indeks == antall)              // ny verdi bakerst
             {
-                Node<T> p = hode;                  // p flyttes indeks - 1 ganger
-                for (int i = 1; i < indeks; i++) p = p.neste;
-
-                p.neste = new Node<>(verdi, p.neste);  // verdi settes inn i listen
+                hale = hale.neste = new Node<>(verdi, hale, null);
+            }
+            else                                    // ny verdi på plass indeks
+            {
+                Node<T> p = finnNode(indeks);     // ny verdi skal til venstre for p
+                p.forrige = p.forrige.neste = new Node<>(verdi, p.forrige, p);
             }
 
-            antall++;                            // listen har fått en ny verdi */
+            antall++;            // ny verdi i listen
+            endringer++;   // en endring i listen
         }
 
     @Override
