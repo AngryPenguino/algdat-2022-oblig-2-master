@@ -158,7 +158,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             throw new IndexOutOfBoundsException("Til: '" + til + "' er større enn antall: '" + antall + "'");
         }
         if(fra > til){
-            throw new IndexOutOfBoundsException("Fra: '" + fra + "' er større enn til: '" + til + "'. Intervallet finnes ikke.")
+            throw new IndexOutOfBoundsException("Fra: '" + fra + "' er større enn til: '" + til + "'. Intervallet finnes ikke.");
         }
     }
 
@@ -184,8 +184,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return verdiGammel;
     }
     public Liste<T> subliste(int fra, int til) {
-        fratilKontroll(antall, fra, til);
-        return
+        fratilKontroll(antall, fra, til);                           //Gjør en test om intervall i lovlig
+
+        DobbeltLenketListe <T> liste = new DobbeltLenketListe<>();  //Oppretter en liste
+        Node<T> subL = finnNode(fra);                               //Bruk finnNode til å hente indeksen lik fra
+        for(int i = fra; i < til; i++){                             //For-løkke til å hente verdiene i fra - > til
+            liste.leggInn(subL.verdi);                              //Legger verdiene inn i listen
+            subL = subL.neste;                                      //Og går videre i listen
+        }
+
+        return liste;                                               //Returnerer den nye listen
     }
     //Oppgave 4
     @Override
