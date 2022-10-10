@@ -86,6 +86,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
              siste = siste.neste;
             }
          siste.neste = nyNode;
+        antall++;
+        endringer++;
         return true;
     }
     //Oppgave 5
