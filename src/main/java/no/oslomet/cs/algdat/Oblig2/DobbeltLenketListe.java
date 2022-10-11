@@ -58,7 +58,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             hode = hale = null;
         }
         else{
-            (hode = hode.neste).forrige = null;
+            (hode = hode.neste).forrige = null; //Kanskje feil?
         }
 
     }
