@@ -383,7 +383,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             for(int j = 0; j < liste.antall(); j++){
                 if((c.compare(liste.hent(i), liste.hent(j))) < 0){
                     T temp = liste.hent(i);
-                    
+                    liste.oppdater(j,liste.hent(i));
+                    liste.oppdater(i,temp);
                 }
             }
         }
