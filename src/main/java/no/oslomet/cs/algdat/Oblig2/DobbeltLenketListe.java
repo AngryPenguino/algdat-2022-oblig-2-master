@@ -200,7 +200,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         Node<T> p = hale;
 
-        for (int indeks = antall; indeks >= 0; indeks--){
+        for (int indeks = antall; indeks > 0; indeks--){
             if (p.verdi.equals(verdi)) return indeks;
             p = p.forrige;
         }
@@ -262,6 +262,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         hode = hale = null;
         antall = 0;
+    }
+
+    public void nullstill2(){
+        while (antall > 0){
+            fjern(0);
+        }
     }
     //Oppgave 2a
     @Override
@@ -339,18 +345,23 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
         @Override
-        public T next() {
+        public T next() {                                   // Tokk utgangspunkt i programkode 3.3.4
+            if (!hasNext()) {
+            throw new NoSuchElementException("ingen flere noder i listen");
+        }
             if(iteratorendringer != endringer){
                 throw new ConcurrentModificationException("Endringer har blitt gjort med listen");
             }
-            if (!hasNext()) {
-                throw new NoSuchElementException("ingen flere noder i listen");
-            }
+
+            Objects.requireNonNull(denne, "Objektet kan ikke være et null-objekt");
+            
             fjernOK = true;
-            T verdi = denne.verdi;                  // Lagrer verdien i "denne"
+
+            T temp = denne.verdi;                  // Lagrer verdien i "denne"
             denne = denne.neste;                    // Flytter "denne" til neste
-            return verdi;
-            }
+
+            return temp;
+        }
         //Oppgave 9
         @Override
         public void remove() {
