@@ -263,6 +263,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         hode = hale = null;
         antall = 0;
+        endringer ++;
     }
 
     public void nullstill2(){
