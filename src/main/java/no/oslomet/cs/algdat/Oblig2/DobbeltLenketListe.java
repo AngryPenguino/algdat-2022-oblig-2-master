@@ -77,17 +77,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     //Oppgave 2b
     @Override
     public boolean leggInn(T verdi) {
-        Node<T> nyNode = new Node<>(verdi);
         Objects.requireNonNull(verdi);
-            hode = new Node<T>(verdi);
-                 nyNode.neste = null;
-         Node<T> siste = hode;
-         while (siste.neste != null){
-             siste = siste.neste;
-            }
-         siste.neste = nyNode;
+        if (antall == 0) hode = hale = new Node<T>(verdi, null,null);
+        else hale = hale.neste = new Node<T>(verdi,hale,null );
         antall++;
-        endringer++;
         return true;
     }
     //Oppgave 5
@@ -282,8 +275,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             while (a != null){
                 streng.append(a.verdi);
                 streng.append(',');
+                streng.append(' ');
                 a = a.neste;
             }
+            streng.deleteCharAt(streng.lastIndexOf(","));
+            streng.deleteCharAt(streng.lastIndexOf(" "));
             streng.append(']');
             return streng.toString();
         }
@@ -298,9 +294,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         Node<T> a = hale;
         while (a != null){
             omvendtStreng.append(a.verdi);
-            omvendtStreng.append('a');
+            omvendtStreng.append(',');
+            omvendtStreng.append(' ');
             a = a.forrige;
         }
+        omvendtStreng.deleteCharAt(omvendtStreng.lastIndexOf(","));
+        omvendtStreng.deleteCharAt(omvendtStreng.lastIndexOf(" "));
         omvendtStreng.append(']');
         return omvendtStreng.toString();
     }
