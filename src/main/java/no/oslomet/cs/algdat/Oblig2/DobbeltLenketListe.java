@@ -207,7 +207,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         Node<T> p = hale;
 
-        for (int indeks = antall; indeks >= 0; indeks--){
+        for (int indeks = antall; indeks > 0; indeks--){
             if (p.verdi.equals(verdi)) return indeks;
             p = p.forrige;
         }
