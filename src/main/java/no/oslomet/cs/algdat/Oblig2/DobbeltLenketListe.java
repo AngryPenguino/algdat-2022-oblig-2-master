@@ -270,6 +270,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         hode = hale = null;
         antall = 0;
     }
+
+    public void nullstill2(){
+        while (antall > 0){
+            fjern(0);
+        }
+    }
     //Oppgave 2a
     @Override
     public String toString() {
