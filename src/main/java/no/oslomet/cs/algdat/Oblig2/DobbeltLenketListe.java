@@ -167,10 +167,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return finnNode(indeks).verdi;              //Returnerer verdien til indeksen
     }
     //Til oppgave 3
+    public void fungerPLEASE(){
+
+    }
     @Override
     public T oppdater(int indeks, T nyverdi) {
         indeksKontroll(indeks, false);       //Sjekker indeksen
-        nullSjekk(indeks);                          //Sjekker at indeksene ikke er null
+        nullSjekk(nyverdi);                          //Sjekker at indeksene ikke er null
+        nullSjekk(indeks);
+        fungerPLEASE();
 
 
         Node<T> Oppdater = finnNode(indeks);        //Bruker finnNode til å finne den nye verdien
