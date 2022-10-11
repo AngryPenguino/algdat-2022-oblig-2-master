@@ -80,6 +80,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         Objects.requireNonNull(verdi);
         if (antall == 0) hode = hale = new Node<T>(verdi, null,null);
         else hale = hale.neste = new Node<T>(verdi,hale,null );
+        endringer++;
         antall++;
         return true;
     }
