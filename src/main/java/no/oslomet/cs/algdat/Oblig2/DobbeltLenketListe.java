@@ -382,6 +382,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         for(int i = 0; i < liste.antall(); i++){
             for(int j = 0; j < liste.antall(); j++){
                 if((c.compare(liste.hent(i), liste.hent(j))) < 0){
+                    T temp = liste.hent(i);
                     
                 }
             }
