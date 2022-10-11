@@ -354,6 +354,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 throw new ConcurrentModificationException("Endringer har blitt gjort med listen");
             }
 
+            Objects.requireNonNull(denne, "Objektet kan ikke være et null-objekt");
+            
             fjernOK = true;
 
             T temp = denne.verdi;                  // Lagrer verdien i "denne"
