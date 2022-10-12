@@ -85,11 +85,24 @@ I den andre versjonen har vi også en while-loop men som går så lenge antall e
 vil den kalle på fjern-metoden med indeks 0 som parameter. Den vil da ta bort noden som står på indeks 0 noe som vil
 minke antallet for hver gang og kjøres helt til antall > 0.
 
-8
+I oppgave 8a startet vi med å lage next(). Den skal først sjekke om listen har en neste verdi. 
+Om den har det så sjekker om iteratorendringer er lik endringer og om det også er sant og til slutt sjekker etter null verdier.
+Dersom alt dette går gjennom blir fjernOK satt til true og verdien denne blir satt til neste verdi i listen (neste node)
+
+I b) så returnerer Iterator<T> iterator() en ny instans av DobbeltLenketListeIterator()
+DobbeltLenketListeIterator er en konstruktor setter variablen "denne" som brukes i next() til hode, starten av listen.
+
+Lager deretter DobbeltLenketListeIterator(int indeks) som nå tar inn en indeks, sjekker om indeksen er lovlig med hjelpefunksjonen indeksKontroll()
+så setter variablen "denne" til noden til indeksen vi ønsker ved hjelp av finnNode() funksjonen.
+
+Til slutt i  Iterator<T>  iterator(int  indeks) gjøres det først en indeksKontroll, om det går gjennom returneres
+en ny DobbeltLenketListeIterator(int indeks) konstruktor.
+
 
 I oppgave 9 startet vi med å følge kravene i oppgaven om at hvis metoden ikke kan kalles skal den kaste IllegalStateException,
 og ConcurrentModificationException dersom iteratorendringer ikke er lik endringer.
 Deretter settes fjernOK til false og vi kaller fjernNode på enten hale eller dennes forrige
 avhengig av om noden vi er på er null eller ikke.
 
-10
+Vi startet oppgave 10 med å sjekke om listen er tom og returnere dersom den var det.
+Deretter kjører vi en bobblesortering hvor vi bruker c.compare for å sammenligne. 
