@@ -196,7 +196,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
     //Oppgave 4
     @Override
-    public int indeksTil(T verdi) { //Utgangspunkt fra løsningsforslag fra kompendiet Oppgave 2 avsnitt 3.3.3
+    public int indeksTil(T verdi) { //(Utgangspunkt) fra løsningsforslag fra kompendiet Oppgave 2 avsnitt 3.3.3
         if(verdi == null){
             return -1;
         }
@@ -211,7 +211,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
 
     //Oppgave 6
-    private T fjernNode(Node<T> p)  // private hjelpemetode
+    private T fjernNode(Node<T> p)  //hjelpemetode
     {
         if (p == hode)
         {
@@ -219,16 +219,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             else (hode = hode.neste).forrige = null;  // fjerner den første
         }
         else if (p == hale) (hale = hale.forrige).neste = null;  // fjerner den siste
-        else (p.forrige.neste = p.neste).forrige = p.forrige;    // fjerner p
+        else (p.forrige.neste = p.neste).forrige = p.forrige;
 
-        antall--;     // en mindre i listen
-        endringer++;  // en endring
+        antall--;
+        endringer++;
 
         return p.verdi;
     }
 
     @Override
-    public boolean fjern(T verdi) //Fra kompendiet løsningsforslag oppgave 3 i avsnitt 3.3.3
+    public boolean fjern(T verdi) //Utgangspunkt fra kompendiet løsningsforslag oppgave 3 i avsnitt 3.3.3
     {
         if (verdi == null) return false;  // ingen nullverdier i listen
 
@@ -236,7 +236,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         {
             if (p.verdi.equals(verdi))
             {
-                fjernNode(p);   // bruker den private hjelpemetoden
+                fjernNode(p);
                 return true;
             }
         }
@@ -244,7 +244,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     @Override
-    public T fjern(int indeks) //Programkode 3.3.3 c) fra kompendiet
+    public T fjern(int indeks)
     {
         indeksKontroll(indeks, false);
 
