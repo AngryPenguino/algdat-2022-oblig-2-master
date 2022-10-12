@@ -122,9 +122,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     //Hjelpemetoder til oppgave 3
     private Node<T> finnNode(int indeks){
 
-        indeksKontroll(indeks, false);           //Sjekker om indeksen er lovlig
-
-
         Node<T> finnN;                                  //Initialiserer variabel
 
         if(indeks < antall / 2){                        //Om indeksen til tallet er mindre en full antall / 2.
@@ -140,7 +137,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
         }
 
-        return finnN;                                   //Returnerer den ønskede verdien.
+        return finnN;                    //Returnerer den ønskede verdien.
+
+
 
     }
     private static <T> void nullSjekk(T verdi){         //Om verdien som skal inn er null, ingen verdi, så blir det sendt error
@@ -156,7 +155,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             throw new IndexOutOfBoundsException("Til: '" + til + "' er større enn antall: '" + antall + "'");
         }
         if(fra > til){      //Om fra er større enn til så får vi error. Start større enn slutt er kult.
-            throw new IndexOutOfBoundsException("Fra: '" + fra + "' er større enn til: '" + til + "'. Intervallet finnes ikke.");
+            throw new IllegalArgumentException("Fra: '" + fra + "' er større enn til: '" + til + "'. Intervallet finnes ikke.");
         }
     }
 
@@ -174,8 +173,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public T oppdater(int indeks, T nyverdi) {
         indeksKontroll(indeks, false);       //Sjekker indeksen
         nullSjekk(nyverdi);                          //Sjekker at indeksene ikke er null
-        nullSjekk(indeks);
-        fungerPLEASE();
 
 
         Node<T> Oppdater = finnNode(indeks);        //Bruker finnNode til å finne den nye verdien
