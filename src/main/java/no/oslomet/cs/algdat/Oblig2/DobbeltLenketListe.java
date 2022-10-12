@@ -368,13 +368,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //Oppgave 9
         @Override
         public void remove() {
-            if (fjernOK == false){
-                throw new IllegalStateException();
-            } else if (iteratorendringer != endringer) {
-                throw new ConcurrentModificationException();
-                } Node<T> current = null;
-            }
+            if (fjernOK == false){throw new IllegalStateException();}
+            if (iteratorendringer != endringer) {throw new ConcurrentModificationException();}
+            fjernOK = false;
+            if(denne==null){
+                fjernNode(hale);
+            } else {fjernNode(denne.forrige);}
+            iteratorendringer++;
         }
+    }
         // class DobbeltLenketListeIterator
     //Oppgave 10
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
