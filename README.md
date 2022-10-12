@@ -13,7 +13,7 @@ I oppgaven har vi hatt følgende arbeidsfordeling:
 * Nicolai har hatt hovedansvar for oppgave 1, 3 
 * Jakob har hatt hovedansvar for oopgave 4,5 og 6
 * Jonas har hatt hovedansvar for oppgave 2 og 9. 
-* Georg Har hatt hovedansvar for oppgave 8
+* Georg Har hatt hovedansvar for oppgave 8 og 10
 * Vi har i fellesskap løst oppgave 7 
 
 # Oppgavebeskrivelse
