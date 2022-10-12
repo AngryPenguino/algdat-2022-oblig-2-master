@@ -255,21 +255,21 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public void nullstill() {
         Node<T> p = hode, q = null; //Utganspunkt fra løsningsforslag komendiet oppgave 2 avsnitt 3.3.2
 
-        while (p != null)
+        while (p != null) //Kjører så lenge p ikke er null
         {
-            q = p.neste;
-            p.neste = null;
-            p.verdi = null;
-            p = q;
+            q = p.neste; //Hjelpenoden tilsettes til p.neste
+            p.neste = null; //p.neste settes til null
+            p.verdi = null; //p.verdi settes til null
+            p = q; //p blir q, vår hjelpenode
         }
-        hode = hale = null;
-        antall = 0;
-        endringer ++;
+        hode = hale = null; //Både hode og hale settes til null
+        antall = 0; //Antall blir 0
+        endringer ++; //Endringer øker
     }
 
     public void nullstill2(){
-        while (antall > 0){
-            fjern(0);
+        while (antall > 0){ //Kjøres så lenge antall er større enn 0
+            fjern(0); //Kaller på fjern-metoden
         }
     }
     //Oppgave 2a
