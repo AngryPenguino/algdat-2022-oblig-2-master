@@ -72,4 +72,5 @@ og ConcurrentModificationException dersom iteratorendringer ikke er lik endringe
 Deretter settes fjernOK til false og vi kaller fjernNode på enten hale eller dennes forrige
 avhengig av om noden vi er på er null eller ikke.
 
-10
+Vi startet oppgave 10 med å sjekke om listen er tom og returnere dersom den var det.
+Deretter kjører vi en bobblesortering hvor vi bruker c.compare for å sammenligne. 
