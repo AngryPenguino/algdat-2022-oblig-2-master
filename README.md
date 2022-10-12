@@ -23,7 +23,14 @@ Deretter lagde jeg en dobbeltlenketliste konstruktor som blir startet i DobbeltL
 Begynner med en midlertidig node til lenken, så går vi gjennom arrayet a med en for løkke. Om verdiene ikke er null så blir det lagt til en ny node, hale, på enden av listen.
 Til slutt fjerner vi den midlertidige hjelpenoden. 
 
-I oppgave 2 så brukte vi en ... til å ...
+I oppgave 2a startet vi med bare å lage en enkel sjekk får å sjekke om listen var tom. Deretter opprettet vi en stringbuilder.
+Vi startet med bare å appende det vi viste skulle først, altså "[", og det vi viste skulle sist "]".
+Deretter lagde vi en loop som gikk gjennom listen å la til alle noder. Og så appendet vi komma og mellomrom for å få ønsket svar.
+For at det ikke skulle være ekstra tegn på slutten fjernet vi det siste komma og det siste mellomrommet.
+
+I den andre metoden i 2a gjorde vi bare det samme, men vi snudde løkken. Altså at den gikk fra slutten, mot starten.
+
+I oppgave 2b fikk vi hjelp av Programkode 3.3.2 f) fra kompendiet, og fikk den til å også øke endringer.
 
 I oppgave 3a startet jeg med å lage hjelpemetoden finnNode(). Den sjekker først om tallet enten er mindre enn halve lengden til listen. 
 Om den er det så startes søket etter noden fra hode. Kjører gjennom en for-løkke til vi kommer til indeksen og setter finnN variablen til neste node til noden er funnet.
@@ -60,6 +67,9 @@ betyr det at den enten er null eller ikke finnes i den lenkede listen.
 
 8
 
-9
+I oppgave 9 startet vi med å følge kravene i oppgaven om at hvis metoden ikke kan kalles skal den kaste IllegalStateException,
+og ConcurrentModificationException dersom iteratorendringer ikke er lik endringer.
+Deretter settes fjernOK til false og vi kaller fjernNode på enten hale eller dennes forrige
+avhengig av om noden vi er på er null eller ikke.
 
 10
