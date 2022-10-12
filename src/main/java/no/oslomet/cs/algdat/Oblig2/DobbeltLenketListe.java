@@ -204,11 +204,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         if(verdi == null){
             return -1;
         }
-        Node<T> p = hale;
+        Node<T> p = hode;
 
-        for (int indeks = antall; indeks > 0; indeks--){
+        for (int indeks = 0; indeks < antall; indeks++){
             if (p.verdi.equals(verdi)) return indeks;
-            p = p.forrige;
+            p = p.neste;
         }
         return -1;
     }
