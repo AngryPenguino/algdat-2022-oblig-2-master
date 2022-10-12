@@ -18,9 +18,23 @@ I oppgaven har vi hatt følgende arbeidsfordeling:
 
 # Oppgavebeskrivelse
 
-I oppgave 1 så gikk vi frem ved å ...
+I oppgave 1 så startet jeg med å lage antall og tom funksjonene. De returnerer henholdsvis antallet objekter og en true/false om tabellen er tom eller ikke.
+Deretter lagde jeg en dobbeltlenketliste konstruktor som blir startet i DobbeltLenketListe(T [] a). Bruker en nullsjekk for at det ikke skal være null-verdier i tabellen.
+Begynner med en midlertidig node til lenken, så går vi gjennom arrayet a med en for løkke. Om verdiene ikke er null så blir det lagt til en ny node, hale, på enden av listen.
+Til slutt fjerner vi den midlertidige hjelpenoden. 
 
 I oppgave 2 så brukte vi en ... til å ...
+
+I oppgave 3a startet jeg med å lage hjelpemetoden finnNode(). Den sjekker først om tallet enten er mindre enn halve lengden til listen. 
+Om den er det så startes søket etter noden fra hode. Kjører gjennom en for-løkke til vi kommer til indeksen og setter finnN variablen til neste node til noden er funnet.
+Det samme gjøres om vi starter bakfra, halen. Returnerer tilslutt noden.
+Lagde deretter hent funksjonen som henter verdien til noden ved hjelp av finnNode hjelpefunksjonen.
+Tilslutt lagde jeg oppdater funksjonen som tar inn en indeks og en nyverdi og endrer indeksverdien til den nye verdien.
+
+I oppgave 3b lagde jeg funksjonen subliste som lager en ny liste utifra nodene våres ved hjelp av både finnNode og leggInn funksjonene.
+For hver gjennomgang av for-løkken som blir leggInn funksjonen kalt som legger inn verdien fra noden funnet ved hjelp av finnNode funksjonen 
+og så går node variablen subL et steg videre i listen. fratilKontroll benyttes for å sjekke at start og slutt kravene er lovlige.
+
 
 I oppgave 4 skulle vi returnere indeksen til gitt verdi, om den i det hele tatt fantes i den lenkede listen. Vi begynte
 med å håndtere ting vi ikke skulle ha med nemlig om verdien var null, da ville vi returnere -1. For å finne indeks til

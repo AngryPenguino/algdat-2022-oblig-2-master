@@ -8,9 +8,7 @@ import java.util.*;
 
 
 public class DobbeltLenketListe<T> implements Liste<T> {
-    public static void main (String [] args){
 
-    }
     /**
      * Node class
      *
@@ -45,14 +43,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     //Oppave 1
     public DobbeltLenketListe(T[] a) {
 
-        this();                                                               //Starter konstruktøren over ^. "DobbeltLenketListe()"
-        nullSjekk(a);                                                         //Verdiene kan ikke være null
+        this();                                                                  //Starter konstruktøren over ^. "DobbeltLenketListe()"
+        nullSjekk(a);                                                            //Bruker hjelpefunksjonen nullsjekk for å passe på at det ikke kommer inn nullverdier
 
-        hode = hale = new Node<>(null);                                 //Midlertidig node for å lage lenken.
+        hode = hale = new Node<>(null);                                    //Midlertidig node for å lage lenken.
         for(T verdi : a){
             if(verdi != null){
-                hale = hale.neste = new Node<>(verdi, hale, null);      //Hvis verdien ikke er null, legger til en ny node på enden av listen.
-                antall++; //Øker telleren for antallet i listen
+                hale = hale.neste = new Node<>(verdi, hale, null);        //Hvis verdien ikke er null, legger til en ny node på enden av listen.
+                antall++;                                                      //Øker telleren for antallet i listen
             }
         }
         //Koden for å fjerne "hode = hale = new Node<>(null) siden den kun var midlertidig.
@@ -129,17 +127,17 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         if(indeks < antall / 2){                        //Om indeksen til tallet er mindre en full antall / 2.
             finnN = hode;                               //Så blir finnN (variablen) satt til starten av rekken.
             for(int i = 0; i < indeks; i++){            //Går gjennom for løkke til vi kommer til indeks nummeret.
-                finnN = finnN.neste;                    //Setter variablen finnN til neste tallet i rekken til vi kommer til ønsket tall.
+                finnN = finnN.neste;                    //Setter variablen finnN til neste tallet i rekken til vi kommer til ønsket node.
             }
         }
         else{                                           //Hvis ikke indeks < antall / 2.
             finnN = hale;                               //Starter vi søket fra enden av rekken i stedet.
-            for(int i = antall - 1; i > indeks; i--){   //Løper jeg for løkken, denne gangen bakfra.
-                finnN = finnN.forrige;                  //Setter variablen finnN til det forrige tallet i rekken til vi kommer til det ønskede tallet.
+            for(int i = antall - 1; i > indeks; i--){   //Løper gjennom for-løkken, denne gangen bakfra.
+                finnN = finnN.forrige;                  //Setter variablen finnN til det forrige tallet i rekken til vi kommer til den ønskede noden.
             }
         }
 
-        return finnN;                                   //Returnerer den ønskede verdien.
+        return finnN;                                   //Returnerer den ønskede noden.
 
 
 
@@ -171,24 +169,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     //Til oppgave 3
     @Override
     public T oppdater(int indeks, T nyverdi) {
-        indeksKontroll(indeks, false);       //Sjekker indeksen
+        indeksKontroll(indeks, false);        //Sjekker indeksen
         nullSjekk(nyverdi);                          //Sjekker at indeksene ikke er null
 
 
-        Node<T> Oppdater = finnNode(indeks);        //Bruker finnNode til å finne den nye verdien
-        T verdiGammel = Oppdater.verdi;             //Setter gammel verdi til den oppdaterte verdien
-        Oppdater.verdi = nyverdi;                   //Og den oppdaterte verdien er nå den nye verdien
+        Node<T> oppdater = finnNode(indeks);         //Bruker finnNode til å finne noden som skal endres
+        T verdiGammel = oppdater.verdi;              //Setter gammel verdi til den oppdaterte verdien
+        oppdater.verdi = nyverdi;                    //Og den oppdaterte verdien er nå den nye verdien
 
 
         endringer++;
-        return verdiGammel;
+        return verdiGammel;                          //Returnerer den gamle verdien
     }
     public Liste<T> subliste(int fra, int til) {
-        fratilKontroll(antall, fra, til);                           //Gjør en test om intervall i lovlig
+        fratilKontroll(antall, fra, til);                           //Gjør en test om intervall start til slutt er lovlig
 
         DobbeltLenketListe <T> liste = new DobbeltLenketListe<>();  //Oppretter en liste
         Node<T> subL = finnNode(fra);                               //Bruk finnNode til å hente indeksen lik fra
-        for(int i = fra; i < til; i++){                             //For-løkke til å hente verdiene i fra - > til
+        for(int i = fra; i < til; i++){                             //Går gjennom for-løkken fra fraverdi til tilverdi
             liste.leggInn(subL.verdi);                              //Legger verdiene inn i listen
             subL = subL.neste;                                      //Og går videre i listen
         }
