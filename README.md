@@ -58,7 +58,19 @@ betyr det at den enten er null eller ikke finnes i den lenkede listen.
 
 7
 
-8
+I oppgave 8a startet vi med å lage next(). Den skal først sjekke om listen har en neste verdi. 
+Om den har det så sjekker om iteratorendringer er lik endringer og om det også er sant og til slutt sjekker etter null verdier.
+Dersom alt dette går gjennom blir fjernOK satt til true og verdien denne blir satt til neste verdi i listen (neste node)
+
+I b) så returnerer Iterator<T> iterator() en ny instans av DobbeltLenketListeIterator()
+DobbeltLenketListeIterator er en konstruktor setter variablen "denne" som brukes i next() til hode, starten av listen.
+
+Lager deretter DobbeltLenketListeIterator(int indeks) som nå tar inn en indeks, sjekker om indeksen er lovlig med hjelpefunksjonen indeksKontroll()
+så setter variablen "denne" til noden til indeksen vi ønsker ved hjelp av finnNode() funksjonen.
+
+Til slutt i  Iterator<T>  iterator(int  indeks) gjøres det først en indeksKontroll, om det går gjennom returneres
+en ny DobbeltLenketListeIterator(int indeks) konstruktor.
+
 
 9
 
