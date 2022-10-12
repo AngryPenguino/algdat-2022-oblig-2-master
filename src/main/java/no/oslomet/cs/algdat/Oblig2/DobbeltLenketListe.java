@@ -167,10 +167,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return finnNode(indeks).verdi;              //Returnerer verdien til indeksen
     }
     //Til oppgave 3
+    public void fungerPLEASE(){
+
+    }
     @Override
     public T oppdater(int indeks, T nyverdi) {
         indeksKontroll(indeks, false);       //Sjekker indeksen
-        nullSjekk(indeks);                          //Sjekker at indeksene ikke er null
+        nullSjekk(nyverdi);                          //Sjekker at indeksene ikke er null
+        nullSjekk(indeks);
+        fungerPLEASE();
 
 
         Node<T> Oppdater = finnNode(indeks);        //Bruker finnNode til å finne den nye verdien
@@ -263,6 +268,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         hode = hale = null;
         antall = 0;
+        endringer ++;
     }
 
     public void nullstill2(){
@@ -380,8 +386,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         // class DobbeltLenketListeIterator
     //Oppgave 10
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
-       for(int i = liste.antall(); i < 0; i--){
-       }
+        if (liste.tom()) return;
+        for(int i = 0; i < liste.antall(); i++){                            // for loop for å loopet gjennom array
+            for(int j = 0; j < liste.antall(); j++){                        // nestet for loop for å sjekke hver hele array for hver del
+                if((c.compare(liste.hent(i), liste.hent(j))) < 0){          // sammenligning mellom hvert punkt ved hjelpå av compare
+                    T temp = liste.hent(i);                                 // foreløpig variabel for i
+                    liste.oppdater(i,liste.hent(j));                        // oppdaterer i for j ved hjelp av oppdater
+                    liste.oppdater(j,temp);                                 // legger så inn den foreløpige verdien i j
+                }
+            }
+        }
     }
 
 } // class DobbeltLenketListe
