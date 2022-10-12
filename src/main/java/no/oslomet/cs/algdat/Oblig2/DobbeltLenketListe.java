@@ -8,7 +8,9 @@ import java.util.*;
 
 
 public class DobbeltLenketListe<T> implements Liste<T> {
+    public static void main (String [] args){
 
+    }
     /**
      * Node class
      *
@@ -35,21 +37,21 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     private int antall;            // antall noder i listen
     private int endringer;         // antall endringer i listen
 
-    public DobbeltLenketListe() {
+    public DobbeltLenketListe() { //Tar utgangspunkt i kompendiet, programkode 3.3.4
         hode = hale = null;
         antall = 0;
         endringer = 0;
     }
     //Oppave 1
     public DobbeltLenketListe(T[] a) {
-        //Test
-        this(); //Starter konstruktøren over ^. "DobbeltLenketListe()"
-        Objects.requireNonNull(a, "a er null, det kan den ikke være"); //Verdiene kan ikke være null
 
-        hode = hale = new Node<>(null); //Midlertidig node for å lage lenken.
+        this();                                                               //Starter konstruktøren over ^. "DobbeltLenketListe()"
+        nullSjekk(a);                                                         //Verdiene kan ikke være null
+
+        hode = hale = new Node<>(null);                                 //Midlertidig node for å lage lenken.
         for(T verdi : a){
             if(verdi != null){
-                hale = hale.neste = new Node<>(verdi, hale, null); //Hvis verdien ikke er null, legger til en ny node på enden av listen.
+                hale = hale.neste = new Node<>(verdi, hale, null);      //Hvis verdien ikke er null, legger til en ny node på enden av listen.
                 antall++; //Øker telleren for antallet i listen
             }
         }
@@ -58,7 +60,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             hode = hale = null;
         }
         else{
-            (hode = hode.neste).forrige = null; //Kanskje feil?
+            (hode = hode.neste).forrige = null;
         }
 
     }
@@ -120,7 +122,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     //Hjelpemetoder til oppgave 3
-    private Node<T> finnNode(int indeks){
+    private Node<T> finnNode(int indeks){               //Kode fra kompendiet, programkode 3.3.3 a)
 
         Node<T> finnN;                                  //Initialiserer variabel
 
@@ -137,7 +139,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
         }
 
-        return finnN;                    //Returnerer den ønskede verdien.
+        return finnN;                                   //Returnerer den ønskede verdien.
 
 
 
@@ -160,15 +162,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     //Oppgave 3
+    //Koden til hent og oppdater fra kompendiet, programkode 3.3.3 b)
     @Override
     public T hent(int indeks) {
         indeksKontroll(indeks, false);       //Sjekker indeksen
         return finnNode(indeks).verdi;              //Returnerer verdien til indeksen
     }
     //Til oppgave 3
-    public void fungerPLEASE(){
-
-    }
     @Override
     public T oppdater(int indeks, T nyverdi) {
         indeksKontroll(indeks, false);       //Sjekker indeksen
@@ -192,7 +192,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             liste.leggInn(subL.verdi);                              //Legger verdiene inn i listen
             subL = subL.neste;                                      //Og går videre i listen
         }
-
         return liste;                                               //Returnerer den nye listen
     }
     //Oppgave 4
