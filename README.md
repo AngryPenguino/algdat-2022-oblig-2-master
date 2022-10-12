@@ -18,9 +18,30 @@ I oppgaven har vi hatt følgende arbeidsfordeling:
 
 # Oppgavebeskrivelse
 
-I oppgave 1 så gikk vi frem ved å ...
+I oppgave 1 så startet jeg med å lage antall og tom funksjonene. De returnerer henholdsvis antallet objekter og en true/false om tabellen er tom eller ikke.
+Deretter lagde jeg en dobbeltlenketliste konstruktor som blir startet i DobbeltLenketListe(T [] a). Bruker en nullsjekk for at det ikke skal være null-verdier i tabellen.
+Begynner med en midlertidig node til lenken, så går vi gjennom arrayet a med en for løkke. Om verdiene ikke er null så blir det lagt til en ny node, hale, på enden av listen.
+Til slutt fjerner vi den midlertidige hjelpenoden. 
 
-I oppgave 2 så brukte vi en ... til å ...
+I oppgave 2a startet vi med bare å lage en enkel sjekk får å sjekke om listen var tom. Deretter opprettet vi en stringbuilder.
+Vi startet med bare å appende det vi viste skulle først, altså "[", og det vi viste skulle sist "]".
+Deretter lagde vi en loop som gikk gjennom listen å la til alle noder. Og så appendet vi komma og mellomrom for å få ønsket svar.
+For at det ikke skulle være ekstra tegn på slutten fjernet vi det siste komma og det siste mellomrommet.
+
+I den andre metoden i 2a gjorde vi bare det samme, men vi snudde løkken. Altså at den gikk fra slutten, mot starten.
+
+I oppgave 2b fikk vi hjelp av Programkode 3.3.2 f) fra kompendiet, og fikk den til å også øke endringer.
+
+I oppgave 3a startet jeg med å lage hjelpemetoden finnNode(). Den sjekker først om tallet enten er mindre enn halve lengden til listen. 
+Om den er det så startes søket etter noden fra hode. Kjører gjennom en for-løkke til vi kommer til indeksen og setter finnN variablen til neste node til noden er funnet.
+Det samme gjøres om vi starter bakfra, halen. Returnerer tilslutt noden.
+Lagde deretter hent funksjonen som henter verdien til noden ved hjelp av finnNode hjelpefunksjonen.
+Tilslutt lagde jeg oppdater funksjonen som tar inn en indeks og en nyverdi og endrer indeksverdien til den nye verdien.
+
+I oppgave 3b lagde jeg funksjonen subliste som lager en ny liste utifra nodene våres ved hjelp av både finnNode og leggInn funksjonene.
+For hver gjennomgang av for-løkken som blir leggInn funksjonen kalt som legger inn verdien fra noden funnet ved hjelp av finnNode funksjonen 
+og så går node variablen subL et steg videre i listen. fratilKontroll benyttes for å sjekke at start og slutt kravene er lovlige.
+
 
 I oppgave 4 skulle vi returnere indeksen til gitt verdi, om den i det hele tatt fantes i den lenkede listen. Vi begynte
 med å håndtere ting vi ikke skulle ha med nemlig om verdien var null, da ville vi returnere -1. For å finne indeks til
@@ -66,6 +87,9 @@ minke antallet for hver gang og kjøres helt til antall > 0.
 
 8
 
-9
+I oppgave 9 startet vi med å følge kravene i oppgaven om at hvis metoden ikke kan kalles skal den kaste IllegalStateException,
+og ConcurrentModificationException dersom iteratorendringer ikke er lik endringer.
+Deretter settes fjernOK til false og vi kaller fjernNode på enten hale eller dennes forrige
+avhengig av om noden vi er på er null eller ikke.
 
 10

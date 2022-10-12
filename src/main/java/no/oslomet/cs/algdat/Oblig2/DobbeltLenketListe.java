@@ -35,22 +35,22 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     private int antall;            // antall noder i listen
     private int endringer;         // antall endringer i listen
 
-    public DobbeltLenketListe() {
+    public DobbeltLenketListe() { //Tar utgangspunkt i kompendiet, programkode 3.3.4
         hode = hale = null;
         antall = 0;
         endringer = 0;
     }
     //Oppave 1
     public DobbeltLenketListe(T[] a) {
-        //Test
-        this(); //Starter konstruktøren over ^. "DobbeltLenketListe()"
-        Objects.requireNonNull(a, "a er null, det kan den ikke være"); //Verdiene kan ikke være null
 
-        hode = hale = new Node<>(null); //Midlertidig node for å lage lenken.
+        this();                                                                  //Starter konstruktøren over ^. "DobbeltLenketListe()"
+        nullSjekk(a);                                                            //Bruker hjelpefunksjonen nullsjekk for å passe på at det ikke kommer inn nullverdier
+
+        hode = hale = new Node<>(null);                                    //Midlertidig node for å lage lenken.
         for(T verdi : a){
             if(verdi != null){
-                hale = hale.neste = new Node<>(verdi, hale, null); //Hvis verdien ikke er null, legger til en ny node på enden av listen.
-                antall++; //Øker telleren for antallet i listen
+                hale = hale.neste = new Node<>(verdi, hale, null);        //Hvis verdien ikke er null, legger til en ny node på enden av listen.
+                antall++;                                                      //Øker telleren for antallet i listen
             }
         }
         //Koden for å fjerne "hode = hale = new Node<>(null) siden den kun var midlertidig.
@@ -58,7 +58,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             hode = hale = null;
         }
         else{
-            (hode = hode.neste).forrige = null; //Kanskje feil?
+            (hode = hode.neste).forrige = null;
         }
 
     }
@@ -77,13 +77,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     //Oppgave 2b
     @Override
     public boolean leggInn(T verdi) {
-        Objects.requireNonNull(verdi);
-        if (antall == 0) hode = hale = new Node<T>(verdi, null,null);
-        else hale = hale.neste = new Node<T>(verdi,hale,null );
-        endringer++;
-        antall++;
+        Objects.requireNonNull(verdi);  //Sjekker at verdi ikke er null
+        if (antall == 0) hode = hale = new Node<T>(verdi, null,null); //Hvis det er ingenting i listen legg til ny node av verdi...
+        //...hvor både hode og hale er null
+        else hale = hale.neste = new Node<T>(verdi,hale,null );   //Hvis ikke, legg ny node i hale.neste
+        endringer++;        //Øker endringer med 1
+        antall++;           //Øker antall med 1
         return true;
     }
+    //Tar utgangspunkt i Programkode 3.3.2 f) i kompendiet
     //Oppgave 5
     @Override
         public void leggInn(int indeks, T verdi) //Utgangspunkt fra kompendiet programkode 3.3.2 g)
@@ -120,24 +122,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     //Hjelpemetoder til oppgave 3
-    private Node<T> finnNode(int indeks){
+    private Node<T> finnNode(int indeks){               //Kode fra kompendiet, programkode 3.3.3 a)
 
         Node<T> finnN;                                  //Initialiserer variabel
 
         if(indeks < antall / 2){                        //Om indeksen til tallet er mindre en full antall / 2.
             finnN = hode;                               //Så blir finnN (variablen) satt til starten av rekken.
             for(int i = 0; i < indeks; i++){            //Går gjennom for løkke til vi kommer til indeks nummeret.
-                finnN = finnN.neste;                    //Setter variablen finnN til neste tallet i rekken til vi kommer til ønsket tall.
+                finnN = finnN.neste;                    //Setter variablen finnN til neste tallet i rekken til vi kommer til ønsket node.
             }
         }
         else{                                           //Hvis ikke indeks < antall / 2.
             finnN = hale;                               //Starter vi søket fra enden av rekken i stedet.
-            for(int i = antall - 1; i > indeks; i--){   //Løper jeg for løkken, denne gangen bakfra.
-                finnN = finnN.forrige;                  //Setter variablen finnN til det forrige tallet i rekken til vi kommer til det ønskede tallet.
+            for(int i = antall - 1; i > indeks; i--){   //Løper gjennom for-løkken, denne gangen bakfra.
+                finnN = finnN.forrige;                  //Setter variablen finnN til det forrige tallet i rekken til vi kommer til den ønskede noden.
             }
         }
 
-        return finnN;                    //Returnerer den ønskede verdien.
+        return finnN;                                   //Returnerer den ønskede noden.
 
 
 
@@ -160,39 +162,36 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     //Oppgave 3
+    //Koden til hent og oppdater fra kompendiet, programkode 3.3.3 b)
     @Override
     public T hent(int indeks) {
         indeksKontroll(indeks, false);       //Sjekker indeksen
         return finnNode(indeks).verdi;              //Returnerer verdien til indeksen
     }
     //Til oppgave 3
-    public void fungerPLEASE(){
-
-    }
     @Override
     public T oppdater(int indeks, T nyverdi) {
-        indeksKontroll(indeks, false);       //Sjekker indeksen
+        indeksKontroll(indeks, false);        //Sjekker indeksen
         nullSjekk(nyverdi);                          //Sjekker at indeksene ikke er null
 
 
-        Node<T> Oppdater = finnNode(indeks);        //Bruker finnNode til å finne den nye verdien
-        T verdiGammel = Oppdater.verdi;             //Setter gammel verdi til den oppdaterte verdien
-        Oppdater.verdi = nyverdi;                   //Og den oppdaterte verdien er nå den nye verdien
+        Node<T> oppdater = finnNode(indeks);         //Bruker finnNode til å finne noden som skal endres
+        T verdiGammel = oppdater.verdi;              //Setter gammel verdi til den oppdaterte verdien
+        oppdater.verdi = nyverdi;                    //Og den oppdaterte verdien er nå den nye verdien
 
 
         endringer++;
-        return verdiGammel;
+        return verdiGammel;                          //Returnerer den gamle verdien
     }
     public Liste<T> subliste(int fra, int til) {
-        fratilKontroll(antall, fra, til);                           //Gjør en test om intervall i lovlig
+        fratilKontroll(antall, fra, til);                           //Gjør en test om intervall start til slutt er lovlig
 
         DobbeltLenketListe <T> liste = new DobbeltLenketListe<>();  //Oppretter en liste
         Node<T> subL = finnNode(fra);                               //Bruk finnNode til å hente indeksen lik fra
-        for(int i = fra; i < til; i++){                             //For-løkke til å hente verdiene i fra - > til
+        for(int i = fra; i < til; i++){                             //Går gjennom for-løkken fra fraverdi til tilverdi
             liste.leggInn(subL.verdi);                              //Legger verdiene inn i listen
             subL = subL.neste;                                      //Og går videre i listen
         }
-
         return liste;                                               //Returnerer den nye listen
     }
     //Oppgave 4
@@ -277,41 +276,41 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public String toString() {
         if(antall == 0){
-            return "[]";
+            return "[]";        //Hvis listen er tom returnerer []
         } else {
-            StringBuilder streng = new StringBuilder();
-            streng.append('[');
-            Node<T> a = hode;
-            while (a != null){
-                streng.append(a.verdi);
+            StringBuilder streng = new StringBuilder(); //Oppretter StringBuilder
+            streng.append('[');                         //Legger til [ på starten
+            Node<T> a = hode;                           //Starter på hode
+            while (a != null){                          //Loop går gjennom fra starten
+                streng.append(a.verdi);                 //Legger til a.verdi, "," og et mellomrom.
                 streng.append(',');
                 streng.append(' ');
                 a = a.neste;
             }
-            streng.deleteCharAt(streng.lastIndexOf(","));
+            streng.deleteCharAt(streng.lastIndexOf(","));   //Fjerner ekstra komma og mellomrom
             streng.deleteCharAt(streng.lastIndexOf(" "));
-            streng.append(']');
-            return streng.toString();
+            streng.append(']');                                //Legger til siste ]
+            return streng.toString();                          //Returnerer som streng
         }
     }
     //Oppgave 2a
     public String omvendtString() {
         if(antall == 0){
-            return "[]";
+            return "[]";        //Hvis listen er tom returnerer []
         }
-        StringBuilder omvendtStreng = new StringBuilder();
-        omvendtStreng.append('[');
-        Node<T> a = hale;
-        while (a != null){
-            omvendtStreng.append(a.verdi);
+        StringBuilder omvendtStreng = new StringBuilder(); //Oppretter StringBuilder
+        omvendtStreng.append('[');                         //Legger til [ på starten
+        Node<T> a = hale;                                  //Starter på hale
+        while (a != null){                                 //Loop går gjennom fra slutten
+            omvendtStreng.append(a.verdi);                 //Legger til a.verdi, "," og et mellomrom.
             omvendtStreng.append(',');
             omvendtStreng.append(' ');
             a = a.forrige;
         }
-        omvendtStreng.deleteCharAt(omvendtStreng.lastIndexOf(","));
+        omvendtStreng.deleteCharAt(omvendtStreng.lastIndexOf(","));    //Fjerner ekstra komma og mellomrom
         omvendtStreng.deleteCharAt(omvendtStreng.lastIndexOf(" "));
-        omvendtStreng.append(']');
-        return omvendtStreng.toString();
+        omvendtStreng.append(']');                                         //Legger til siste ]
+        return omvendtStreng.toString();                                   //Returnerer som streng
     }
 
 
@@ -371,13 +370,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //Oppgave 9
         @Override
         public void remove() {
-            if (fjernOK == false){throw new IllegalStateException();}
-            if (iteratorendringer != endringer) {throw new ConcurrentModificationException();}
+            if (fjernOK == false){throw new IllegalStateException();}  //Sjekk om metoden kan kalles
+            if (iteratorendringer != endringer) {throw new ConcurrentModificationException();} //Hvis iteratorendringer og endringer ikke er samme kast unntak
             fjernOK = false;
-            if(denne==null){
+            if(denne==null){        //Hvis denne er null kalles fjernNode på hale
                 fjernNode(hale);
-            } else {fjernNode(denne.forrige);}
-            iteratorendringer++;
+            } else {fjernNode(denne.forrige);}  //Hvis ikke kalles fjernNode på den forrige
+            iteratorendringer++;                //Øker iteratorendringer
         }
     }
         // class DobbeltLenketListeIterator
