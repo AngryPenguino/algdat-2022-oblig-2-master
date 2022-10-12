@@ -77,13 +77,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     //Oppgave 2b
     @Override
     public boolean leggInn(T verdi) {
-        Objects.requireNonNull(verdi);
-        if (antall == 0) hode = hale = new Node<T>(verdi, null,null);
-        else hale = hale.neste = new Node<T>(verdi,hale,null );
-        endringer++;
-        antall++;
+        Objects.requireNonNull(verdi);  //Sjekker at verdi ikke er null
+        if (antall == 0) hode = hale = new Node<T>(verdi, null,null); //Hvis det er ingenting i listen legg til ny node av verdi...
+        //...hvor både hode og hale er null
+        else hale = hale.neste = new Node<T>(verdi,hale,null );   //Hvis ikke, legg ny node i hale.neste
+        endringer++;        //Øker endringer med 1
+        antall++;           //Øker antall med 1
         return true;
     }
+    //Tar utgangspunkt i Programkode 3.3.2 f) i kompendiet
     //Oppgave 5
     @Override
         public void leggInn(int indeks, T verdi) //Utgangspunkt fra kompendiet programkode 3.3.2 g)
@@ -194,7 +196,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
     //Oppgave 4
     @Override
-    public int indeksTil(T verdi) { //Utgangspunkt fra løsningsforslag fra kompendiet Oppgave 2 avsnitt 3.3.3
+    public int indeksTil(T verdi) { //(Utgangspunkt) fra løsningsforslag fra kompendiet Oppgave 2 avsnitt 3.3.3
         if(verdi == null){
             return -1;
         }
@@ -209,7 +211,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
 
     //Oppgave 6
-    private T fjernNode(Node<T> p)  // private hjelpemetode
+    private T fjernNode(Node<T> p)  //hjelpemetode
     {
         if (p == hode)
         {
@@ -217,16 +219,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             else (hode = hode.neste).forrige = null;  // fjerner den første
         }
         else if (p == hale) (hale = hale.forrige).neste = null;  // fjerner den siste
-        else (p.forrige.neste = p.neste).forrige = p.forrige;    // fjerner p
+        else (p.forrige.neste = p.neste).forrige = p.forrige;
 
-        antall--;     // en mindre i listen
-        endringer++;  // en endring
+        antall--;
+        endringer++;
 
         return p.verdi;
     }
 
     @Override
-    public boolean fjern(T verdi) //Fra kompendiet løsningsforslag oppgave 3 i avsnitt 3.3.3
+    public boolean fjern(T verdi) //Utgangspunkt fra kompendiet løsningsforslag oppgave 3 i avsnitt 3.3.3
     {
         if (verdi == null) return false;  // ingen nullverdier i listen
 
@@ -234,7 +236,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         {
             if (p.verdi.equals(verdi))
             {
-                fjernNode(p);   // bruker den private hjelpemetoden
+                fjernNode(p);
                 return true;
             }
         }
@@ -242,7 +244,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     @Override
-    public T fjern(int indeks) //Programkode 3.3.3 c) fra kompendiet
+    public T fjern(int indeks)
     {
         indeksKontroll(indeks, false);
 
@@ -274,41 +276,41 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public String toString() {
         if(antall == 0){
-            return "[]";
+            return "[]";        //Hvis listen er tom returnerer []
         } else {
-            StringBuilder streng = new StringBuilder();
-            streng.append('[');
-            Node<T> a = hode;
-            while (a != null){
-                streng.append(a.verdi);
+            StringBuilder streng = new StringBuilder(); //Oppretter StringBuilder
+            streng.append('[');                         //Legger til [ på starten
+            Node<T> a = hode;                           //Starter på hode
+            while (a != null){                          //Loop går gjennom fra starten
+                streng.append(a.verdi);                 //Legger til a.verdi, "," og et mellomrom.
                 streng.append(',');
                 streng.append(' ');
                 a = a.neste;
             }
-            streng.deleteCharAt(streng.lastIndexOf(","));
+            streng.deleteCharAt(streng.lastIndexOf(","));   //Fjerner ekstra komma og mellomrom
             streng.deleteCharAt(streng.lastIndexOf(" "));
-            streng.append(']');
-            return streng.toString();
+            streng.append(']');                                //Legger til siste ]
+            return streng.toString();                          //Returnerer som streng
         }
     }
     //Oppgave 2a
     public String omvendtString() {
         if(antall == 0){
-            return "[]";
+            return "[]";        //Hvis listen er tom returnerer []
         }
-        StringBuilder omvendtStreng = new StringBuilder();
-        omvendtStreng.append('[');
-        Node<T> a = hale;
-        while (a != null){
-            omvendtStreng.append(a.verdi);
+        StringBuilder omvendtStreng = new StringBuilder(); //Oppretter StringBuilder
+        omvendtStreng.append('[');                         //Legger til [ på starten
+        Node<T> a = hale;                                  //Starter på hale
+        while (a != null){                                 //Loop går gjennom fra slutten
+            omvendtStreng.append(a.verdi);                 //Legger til a.verdi, "," og et mellomrom.
             omvendtStreng.append(',');
             omvendtStreng.append(' ');
             a = a.forrige;
         }
-        omvendtStreng.deleteCharAt(omvendtStreng.lastIndexOf(","));
+        omvendtStreng.deleteCharAt(omvendtStreng.lastIndexOf(","));    //Fjerner ekstra komma og mellomrom
         omvendtStreng.deleteCharAt(omvendtStreng.lastIndexOf(" "));
-        omvendtStreng.append(']');
-        return omvendtStreng.toString();
+        omvendtStreng.append(']');                                         //Legger til siste ]
+        return omvendtStreng.toString();                                   //Returnerer som streng
     }
 
 
@@ -368,13 +370,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //Oppgave 9
         @Override
         public void remove() {
-            if (fjernOK == false){throw new IllegalStateException();}
-            if (iteratorendringer != endringer) {throw new ConcurrentModificationException();}
+            if (fjernOK == false){throw new IllegalStateException();}  //Sjekk om metoden kan kalles
+            if (iteratorendringer != endringer) {throw new ConcurrentModificationException();} //Hvis iteratorendringer og endringer ikke er samme kast unntak
             fjernOK = false;
-            if(denne==null){
+            if(denne==null){        //Hvis denne er null kalles fjernNode på hale
                 fjernNode(hale);
-            } else {fjernNode(denne.forrige);}
-            iteratorendringer++;
+            } else {fjernNode(denne.forrige);}  //Hvis ikke kalles fjernNode på den forrige
+            iteratorendringer++;                //Øker iteratorendringer
         }
     }
         // class DobbeltLenketListeIterator
